@@ -1,0 +1,14 @@
+# Tax data, the local database and certificates never enter the repository.
+data/
+config.local.toml
+*.pfx
+*.p12
+*.pem
+*.key
+
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.impeccable/review/
+.impeccable/mocks/

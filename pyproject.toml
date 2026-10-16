@@ -1,0 +1,49 @@
+[project]
+name = "rotina-fiscal"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = [
+    "alembic>=1.20.0",
+    "cryptography>=50.0.2",
+    "httpx>=0.28.1",
+    "keyring>=25.7.0",
+    "lxml>=6.1.3",
+    "pydantic>=2.13.5",
+    "signxml>=5.1.0",
+    "sqlalchemy>=2.1.3",
+    "textual>=8.2.8",
+]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.6.2",
+    "pytest>=9.1.1",
+    "ruff>=0.16.10",
+    "ty>=0.0.85",
+    "types-lxml>=2026.2.16",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 120
+target-version = "py314"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "C4", "PT", "RET", "S", "RUF"]
+# The UI is typeset in Portuguese (em dash, curly quotes, middle dot).
+ignore = ["RUF001", "RUF002", "RUF003"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]
+# Textual declares BINDINGS and friends as plain class attributes.
+"fiscal/tui.py" = ["RUF012"]
+
+[tool.ruff.lint.flake8-bugbear]
+# pydantic field defaults and SQLAlchemy columns are evaluated once by design.
+extend-immutable-calls = ["pydantic.Field", "sqlalchemy.orm.mapped_column"]
+
+[tool.alembic]
+script_location = "%(here)s/fiscal/migrations"
+prepend_sys_path = ["."]

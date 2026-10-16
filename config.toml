@@ -1,0 +1,45 @@
+# Placeholder values. The real profile goes in config.local.toml (gitignored), which wins when present.
+# Current tax profile. Secrets (certificate password, Serpro keys) never go here:
+# they live in the system keyring.
+# Values are the Portuguese terms the government portals expect; keys are English.
+
+cnpj = "11444777000161"
+# The e-CNPJ A1 file. Its password is asked once and kept in the system keyring.
+certificate_path = "certificado.pfx"
+
+tax_regime = "Simples Nacional"
+accounting_basis = "Competência"
+market = "Exterior"
+
+[nfse]
+service_code = "17.01.02"
+taxation = "Exportação de serviço"
+
+[pgdas]
+activity = "Prestação de Serviços para o exterior"
+classification = "Não sujeitos ao fator \"r\" e tributados pelo Anexo III"
+domestic_revenue = "0.00"
+
+[esocial]
+worker_category = "723"
+tax_unit = "1"                  # lotação tributária
+rubric_table = "17351"
+pro_labore_rubric = "85"
+inss_rubric = "1950"
+pro_labore_quantity = "220.00"
+inss_quantity = "11.00"         # goes in the quantity field; the factor field stays empty
+inss_rate = "0.11"
+payslip_id = "001"              # identificador do demonstrativo
+income_tax_mode = "0 - Normal"
+other_deductions = "0.00"
+immediate_dctfweb = false
+# The partner as eSocial knows them. Registration (matrícula) and Simples indicator are filled
+# in after reading an event the government already accepted.
+worker_cpf = "12345678909"
+
+# Pro-labore validity ranges. A period with no range halts the automation:
+# for a new year, append a block; never edit an old one.
+[[pro_labore]]
+start = "2026-01"
+end = "2026-12"
+amount = "1621.00"
